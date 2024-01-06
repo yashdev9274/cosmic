@@ -68,6 +68,9 @@ const Sidebar: React.FC<SidebarProps> = ({
                     Song Library
                 </Box>
             </div>
+            <main>
+                {children}
+            </main>
         </div>
     );
 }
