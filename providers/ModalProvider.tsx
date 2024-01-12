@@ -2,6 +2,7 @@
 
 import {useEffect, useState} from "react";
 
+import Modal from "@/components/Modal";
 // interface ModalProviderProps {
 //     products: ProductWithPeriod[];
 // }
@@ -19,7 +20,7 @@ const ModalProvider = () =>{
 
     return(
         <>
-            Modals
+            <Modal/>
         </>
     )
 }
