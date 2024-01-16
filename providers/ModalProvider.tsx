@@ -20,7 +20,14 @@ const ModalProvider = () =>{
 
     return(
         <>
-            <Modal/>
+            <Modal
+                title="Test Modal"
+                description="Test Description"
+                isOpen={true}
+                onChange={()=>{}}
+            >
+                Test Children
+            </Modal>
         </>
     )
 }
