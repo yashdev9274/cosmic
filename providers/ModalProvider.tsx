@@ -2,7 +2,7 @@
 
 import {useEffect, useState} from "react";
 
-import Modal from "@/components/Modal";
+import AuthModal from "@/components/AuthModal";
 // interface ModalProviderProps {
 //     products: ProductWithPeriod[];
 // }
@@ -20,14 +20,7 @@ const ModalProvider = () =>{
 
     return(
         <>
-            <Modal
-                title="Test Modal"
-                description="Test Description"
-                isOpen={true}
-                onChange={()=>{}}
-            >
-                Test Children
-            </Modal>
+            <AuthModal/>
         </>
     )
 }
