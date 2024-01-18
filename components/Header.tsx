@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { HiHome } from "react-icons/hi";
 import { BiSearch } from "react-icons/bi";
 import Button from "./Button";
+import useAuthModal from "@/hooks/useAuthModal";
 
 interface HeaderProps {
     children: React.ReactNode;
@@ -22,6 +23,11 @@ const Header: React.FC<HeaderProps> = ({
 
 
     const router = useRouter();
+    const authModal =  useAuthModal();
+
+    const handleLogout = ()=>{
+        // work onn it later
+    }
 
     return ( 
         <div className={twMerge(`
@@ -123,7 +129,7 @@ const Header: React.FC<HeaderProps> = ({
                     <>
                     <div>
                         <Button 
-                        onClick={()=>{}}
+                        onClick={authModal.onOpen}
                         className="
                             bg-transparent 
                             text-neutral-300 
@@ -136,7 +142,7 @@ const Header: React.FC<HeaderProps> = ({
                     <div>
                         {/* this is a custom button here */}
                         <Button 
-                        onClick={()=>{}}
+                        onClick={authModal.onOpen}
                         className="
                             bg-white px-6 py-2
                         ">
