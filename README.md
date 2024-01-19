@@ -1,3 +1,23 @@
+<br>
+<h1 align="center" /> Cosmic
+
+<h2 align="center" >An Open Source Alternative of Spotify </h3>
+
+<p align="center"><a href="">🌐 Website</a> · <a href="">📚 Documentation</a> ·  <a href=""><img src="" width="12" height="12"/> Discord</a> <p>
+<br />
+
+## About the Project
+
+### Home Page
+
+<img width="100%" alt="booking-screen" src="./public/images/Cosmic-home_page.jpeg">
+
+### Login Page
+
+<img width="100%" alt="booking-screen" src="./public/images/Cosmic-login_page.jpeg">
+
+<br/>
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
@@ -14,7 +34,7 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3001](http://localhost:3001) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
