@@ -7,6 +7,9 @@ import { HiHome } from "react-icons/hi";
 import { BiSearch } from "react-icons/bi";
 import Button from "./Button";
 import useAuthModal from "@/hooks/useAuthModal";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useUser } from "@/hooks/useUser";
+import toast from "react-hot-toast";
 
 interface HeaderProps {
     children: React.ReactNode;
@@ -25,8 +28,23 @@ const Header: React.FC<HeaderProps> = ({
     const router = useRouter();
     const authModal =  useAuthModal();
 
-    const handleLogout = ()=>{
-        // work onn it later
+    const supabaseClient = useSupabaseClient();
+    const {user} = useUser();
+
+
+    const handleLogout = async ()=>{
+
+        const {error} = await supabaseClient.auth.signOut();
+
+        router.refresh();
+
+        if(error){
+
+            toast.error(error.message);
+        }
+        else{
+            toast.success('Logged Out!')
+        }
     }
 
     return ( 
@@ -126,31 +144,42 @@ const Header: React.FC<HeaderProps> = ({
                     items-center 
                     justify-center
                 ">
-                    <>
-                    <div>
-                        <Button 
-                        onClick={authModal.onOpen}
-                        className="
-                            bg-transparent 
-                            text-neutral-300 
-                            font-medium
-                        ">
-                            Sign up
-                        </Button>
-                    </div>
+                    {user ? (
+                        <div>
+                            <Button
+                                onClick={handleLogout}
+                                className="bg-white px-6 py-2 "
+                            >
+                                Logout
+                            </Button>
+                        </div>
+                    ):(
+                        <>
+                        <div>
+                            <Button 
+                            onClick={authModal.onOpen}
+                            className="
+                                bg-transparent 
+                                text-neutral-300 
+                                font-medium
+                            ">
+                                Sign up
+                            </Button>
+                        </div>
 
-                    <div>
-                        {/* this is a custom button here */}
-                        <Button 
-                        onClick={authModal.onOpen}
-                        className="
-                            bg-white px-6 py-2
-                        ">
-                            Log in
-                        </Button>
-                    </div>
-                    
-                    </>
+                        <div>
+                            {/* this is a custom button here */}
+                            <Button 
+                            onClick={authModal.onOpen}
+                            className="
+                                bg-white px-6 py-2
+                            ">
+                                Log in
+                            </Button>
+                        </div>
+                        
+                        </>
+                    )}
 
                 </div>
             </div>
