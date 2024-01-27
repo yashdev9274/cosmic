@@ -1,5 +1,5 @@
 <br>
-<h1 align="center" /> Cosmic
+<h1 align="center"> Cosmic </h1>
 
 <h2 align="center" >An Open Source Alternative of Spotify </h3>
 
