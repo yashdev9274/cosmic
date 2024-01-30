@@ -3,6 +3,7 @@
 import {useEffect, useState} from "react";
 
 import AuthModal from "@/components/AuthModal";
+import UploadModal from "@/components/UploadModal";
 // interface ModalProviderProps {
 //     products: ProductWithPeriod[];
 // }
@@ -21,6 +22,7 @@ const ModalProvider = () =>{
     return(
         <>
             <AuthModal/>
+            <UploadModal/>
         </>
     )
 }
