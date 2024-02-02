@@ -1,13 +1,24 @@
+"use client";
+
+import uniqid from "uniqid";
 import React, { useState } from "react";
 import useUploadModal from "@/hooks/useUploadModal";
 import Modal from "./Modal";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import Input from "./Input";
 import Button from "./Button";
+import toast from "react-hot-toast";
+import { useUser } from "@/hooks/useUser";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useRouter } from "next/navigation";
 
 const UploadModal = () => {
     const [isLoading, setIsLoading] = useState(false);
     const uploadModal = useUploadModal();
+
+    const supabaseClient = useSupabaseClient();
+    const {user} = useUser();
+    const router = useRouter();
 
     const {
         register,
@@ -22,7 +33,97 @@ const UploadModal = () => {
         }
     });
 
-    const onSubmit: SubmitHandler<FieldValues> = async (values) => {}
+    const onSubmit: SubmitHandler<FieldValues> = async (values) => {
+
+        try {
+            setIsLoading(true);
+
+            const imageFile = values.image?.[0];
+            const songFile = values.song?.[0];
+
+            if(!imageFile || !songFile || !user){
+                toast.error("Required fields are missing");
+                return;
+            }
+
+            const uniqueID = uniqid();
+
+            // function to upload songs file
+
+            // here storage >> from(songs bucket) >> upload(file, file name, options)
+            const {
+                data: songData,
+                error: songError
+            } = await supabaseClient
+                .storage
+                .from("songs")
+                .upload(`songs-${values.title}-${uniqueID}`, songFile,{
+                    cacheControl: "3600",
+                    upsert: false
+                });
+
+            // song file uploading error
+            
+            if(songError){
+                setIsLoading(false);
+                return toast.error("Song file uploading failed! Please try again.");
+            }
+
+            // function to upload songs image file
+
+            // here storage >> from(images bucket) >> upload(file, file name, options)
+
+            const {
+                data: imageData,
+                error: imageError
+            } = await supabaseClient
+                .storage
+                .from("images")
+                .upload(`images-${values.title}-${uniqueID}`, imageFile,{
+                    cacheControl: "3600",
+                    upsert: false
+                });
+
+            // image file uploading error
+            
+            if(imageError){
+                setIsLoading(false);
+                return toast.error("Image file uploading failed! Please try again.");
+            }
+
+
+            // function to insert song details into songs table
+            const{error: supabaseError} = await supabaseClient
+                .from('songs')
+                .insert({
+                    user_id: user.id,
+                    title: values.title,
+                    author: values.author,
+                    image_path: imageData.path,
+                    song_path: songData.path
+                });
+
+            // error handling for song details insertion
+            if(supabaseError){
+                return toast.error(supabaseError.message);
+            }
+
+            router.refresh();
+            setIsLoading(false);
+            toast.success("Song uploaded successfully");
+            reset();
+            uploadModal.onClose();
+
+
+        // error handling for song and image file uploading
+
+        } catch (error) {
+            toast.error("Somethig went wrong! Please try again.");
+        }
+        finally {
+            setIsLoading(false);
+        }
+    }
 
     const onChange = (open: boolean) => {
         if (!open) {
