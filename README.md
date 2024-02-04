@@ -3,7 +3,7 @@
 
 <h2 align="center" >An Open Source Alternative of Spotify </h3>
 
-<p align="center"><a href="">🌐 Website</a> · <a href="">📚 Documentation</a> ·  <a href=""><img src="" width="12" height="12"/> Discord</a> <p>
+<p align="center"><a href="">🌐 Website</a> · <a href="https://yashdev9274.github.io/Builders-Resources-Hub/docs/intro">📚 Documentation</a> ·  <a href=""><img src="" width="12" height="12"/> Discord</a> <p>
 <br />
 
 ## About the Project
