@@ -20,6 +20,7 @@
     ],
     "paths": {
       "@/*": ["./*"],
+      "@stitches/core/types/styled-component": ["node_modules/@types/stitches/core/types/styled-component.d.ts"],
       
     },
     
