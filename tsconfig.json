@@ -21,7 +21,7 @@
     "paths": {
       "@/*": ["./*"],
       "cookie": ["node_modules/cookie/index.d.ts", "node_modules/@types/cookie/index.d.ts"],
-      "@supabase/supabase-js": ["node_modules/@supabase/supabase-js/index.d.ts"]
+      "@supabase/supabase-js": ["node_modules/@supabase/supabase-js/dist/main/index.d.ts"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
